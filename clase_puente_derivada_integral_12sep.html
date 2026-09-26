@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Puente: De la Derivada a la Integral — Cálculo Integral</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="base.css">
+<style>
+  .mascota-flotante {
+    float: right;
+    width: 150px;
+    margin: 0 0 1rem 1.5rem;
+  }
+  @media (max-width: 640px) {
+    .mascota-flotante { float: none; display: block; margin: 0 auto 1rem; }
+  }
+  .mixtle-quote {
+    display: flex;
+    gap: 1.1rem;
+    align-items: center;
+    background: var(--guinda-light);
+    border: 1px solid #D8A8BA;
+    border-radius: var(--radius-lg);
+    padding: 1.1rem 1.4rem;
+    margin: 1.5rem 0;
+  }
+  .mixtle-quote img { width: 64px; height: auto; flex-shrink: 0; }
+  .mixtle-quote p { margin-bottom: 0; font-size: .97rem; font-style: italic; color: var(--ink-secondary); }
+  .cierre-mascota {
+    display: block;
+    width: 130px;
+    margin: 0 auto 1rem;
+  }
+  .symbol-cell {
+    font-family: var(--font-mono);
+    font-size: 1.05rem;
+    color: var(--guinda-dark);
+    white-space: nowrap;
+  }
+  svg text { font-family: var(--font-ui); }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="logo-wrap"><img src="imagen1.png" alt="Logo IEDEP"></div>
+  <div class="header-text">
+    <span class="inst-name">Instituto de Educación Digital del Estado de Puebla</span>
+    <span class="doc-title">Material de clase · Cálculo Integral</span>
+  </div>
+</header>
+
+<section class="class-hero">
+  <span class="class-label">Licenciatura en Sistemas Computacionales · Cuarto Cuatrimestre</span>
+  <h1>El Puente entre la Derivada y la Integral</h1>
+  <span class="class-subtitle">Sesión de enlace: repasamos a fondo la derivada — su notación, su lectura y su significado — para entender por qué Cálculo Integral empieza justo donde terminó Cálculo Diferencial.</span>
+  <div class="meta-row">
+    <div class="meta-item">Programa educativo<span>Licenciatura en Sistemas Computacionales</span></div>
+    <div class="meta-item">Asignatura<span>Cálculo Integral</span></div>
+    <div class="meta-item">Unidad<span>Sesión puente — previa a la Unidad 1</span></div>
+    <div class="meta-item">Tema<span>Repaso de la derivada: notación, lectura y significado</span></div>
+    <div class="meta-item">Fecha<span>12 de septiembre de 2026</span></div>
+  </div>
+</section>
+
+<main class="page-wrapper">
+
+  <!-- ===================== COMPETENCIAS ===================== -->
+  <section class="section">
+    <span class="section-label">Punto de partida</span>
+    <h2 class="section-title">Competencias a desarrollar</h2>
+
+    <div class="competency-card">
+      <span class="comp-num">🎯</span>
+      <span class="comp-text"><strong>Competencia puente:</strong> Recordar y consolidar el concepto de derivada y su notación simbólica, como base indispensable para comprender la integral como la operación que la revierte.</span>
+    </div>
+    <div class="competency-card">
+      <span class="comp-num">01</span>
+      <span class="comp-text">Identificar, nombrar y leer en voz alta cada símbolo asociado a la derivada (f'(x), dy/dx, Δx, Δy, lím, d/dx).</span>
+    </div>
+    <div class="competency-card">
+      <span class="comp-num">02</span>
+      <span class="comp-text">Calcular derivadas básicas de funciones polinomiales aplicando la regla de la potencia, la constante y la suma.</span>
+    </div>
+    <div class="competency-card">
+      <span class="comp-num">03</span>
+      <span class="comp-text">Anticipar la relación inversa entre derivación e integración, como preparación directa para la Unidad 1 de Cálculo Integral.</span>
+    </div>
+  </section>
+
+  <hr class="section-rule">
+
+  <!-- ===================== POR QUÉ REPASAR ===================== -->
+  <section class="section">
+    <span class="section-label">Antes de empezar</span>
+    <h2 class="section-title">¿Por qué repasar la derivada justo ahora?</h2>
+
+    <img src="imagen2.png" alt="Mixtle, mascota del curso" class="mascota-flotante">
+
+    <p>El cuatrimestre pasado, en <strong>Cálculo Diferencial</strong>, aprendiste a responder una pregunta muy concreta: dada una función que describe cómo cambia algo (una distancia, una ganancia, una temperatura), <strong>¿qué tan rápido cambia en cada instante?</strong> Esa pregunta se resuelve derivando.</p>
+
+    <p><strong>Cálculo Integral</strong> nace de hacer la pregunta exactamente al revés: si ya conozco la rapidez de cambio, <strong>¿puedo reconstruir la función original?</strong> Esa reconstrucción es integrar. Por eso decimos que la integral es la "operación inversa" de la derivada — y por eso, antes de aprender a integrar, conviene dejar la derivada perfectamente clara: su notación, su lectura y su significado.</p>
+
+    <div class="mixtle-quote">
+      <img src="imagen2.png" alt="Mixtle">
+      <p>"Piensa en la derivada y la integral como cerrar y abrir una puerta. Ya sabes cerrarla (derivar); hoy vamos a dejar ese movimiento perfectamente claro, porque mañana aprenderás a abrirla de nuevo (integrar)."</p>
+    </div>
+  </section>
+
+  <!-- ===================== QUÉ ES LA DERIVADA ===================== -->
+  <section class="section">
+    <span class="section-label">Repaso conceptual</span>
+    <h2 class="section-title">¿Qué es, exactamente, la derivada?</h2>
+
+    <div class="concept-box">
+      <span class="concept-title">Definición formal</span>
+      <p>La derivada de una función f en el punto x, denotada f'(x), se define como:</p>
+    </div>
+
+    <div class="formula-block">
+      <code class="formula">f'(x)&nbsp; =&nbsp; lim<sub>h→0</sub>&nbsp; [ f(x+h) − f(x) ] / h</code>
+      <span class="formula-note">Se lee: "f prima de x es igual al límite, cuando h tiende a cero, de f de (x más h) menos f de x, todo entre h".</span>
+    </div>
+
+    <p>No te preocupes si esta fórmula se ve intimidante — lo importante no es memorizarla, sino entender <strong>qué está haciendo</strong>: mide cuánto cambia f(x) (el numerador) cuando x cambia una cantidad muy pequeña h (el denominador), y luego hace que ese "muy pequeña" sea prácticamente cero. El resultado es la <strong>rapidez de cambio instantánea</strong>, es decir, la pendiente de la recta tangente a la curva en ese punto exacto.</p>
+
+    <figure>
+      <svg viewBox="0 0 560 260" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:520px;background:#FAFAFA;border:1px solid #E2D8DA;border-radius:10px;">
+        <line x1="40" y1="20" x2="40" y2="230" stroke="#C8B4BA" stroke-width="1.5"/>
+        <line x1="20" y1="210" x2="540" y2="210" stroke="#C8B4BA" stroke-width="1.5"/>
+        <path d="M 60,205 Q 300,20 520,90" fill="none" stroke="#7B1034" stroke-width="2.5" fill="none"/>
+        <circle cx="330" cy="70" r="5" fill="#490b58"/>
+        <line x1="220" y1="130" x2="440" y2="35" stroke="#C85070" stroke-width="2" stroke-dasharray="6 4"/>
+        <text x="440" y="30" fill="#C85070" font-size="13">recta tangente</text>
+        <text x="335" y="60" fill="#490b58" font-size="13" font-weight="600">(x, f(x))</text>
+        <text x="150" y="245" fill="#5C4850" font-size="13">f'(x) = pendiente de la recta tangente en ese punto</text>
+      </svg>
+      <figcaption>Geométricamente, f'(x) es la inclinación (pendiente) de la línea que "toca" la curva en el punto x, sin cruzarla.</figcaption>
+    </figure>
+  </section>
+
+  <hr class="section-rule">
+
+  <!-- ===================== GLOSARIO DE SÍMBOLOS ===================== -->
+  <section class="section">
+    <span class="section-label">Para no perderte en la notación</span>
+    <h2 class="section-title">Glosario detallado: cada símbolo, su nombre y su lectura</h2>
+
+    <p>Un mismo concepto —la derivada— se escribe de varias formas según el autor o el contexto. Conocer todas las notaciones evita confusiones cuando cambias de libro o de profesor.</p>
+
+    <table>
+      <thead>
+        <tr><th>Símbolo</th><th>Nombre</th><th>Cómo se lee</th><th>Qué significa</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="symbol-cell">f(x)</td>
+          <td>Función evaluada en x</td>
+          <td>"efe de equis"</td>
+          <td>El valor que produce la función f cuando le das la entrada x.</td>
+        </tr>
+        <tr>
+          <td class="symbol-cell">f'(x)</td>
+          <td>Notación de Lagrange</td>
+          <td>"efe prima de equis"</td>
+          <td>La derivada de f en el punto x; la rapidez de cambio instantánea ahí.</td>
+        </tr>
+        <tr>
+          <td class="symbol-cell">dy/dx</td>
+          <td>Notación de Leibniz</td>
+          <td>"derivada de ye respecto a equis" (o "de-ye, de-equis")</td>
+          <td>Mismo significado que f'(x), pero deja explícito qué variable cambia (y) respecto a cuál (x).</td>
+        </tr>
+        <tr>
+          <td class="symbol-cell">d/dx [f(x)]</td>
+          <td>Operador de derivación</td>
+          <td>"derivada, con respecto a equis, de efe de equis"</td>
+          <td>Indica la acción de derivar aplicada a lo que está dentro de los corchetes.</td>
+        </tr>
+        <tr>
+          <td class="symbol-cell">Δx</td>
+          <td>Delta x (incremento)</td>
+          <td>"delta equis"</td>
+          <td>Un cambio finito (no infinitamente pequeño) en la variable x. Δ es la letra griega mayúscula "delta".</td>
+        </tr>
+        <tr>
+          <td class="symbol-cell">Δy</td>
+          <td>Delta y (incremento)</td>
+          <td>"delta ye"</td>
+          <td>El cambio correspondiente en y cuando x cambió Δx.</td>
+        </tr>
+        <tr>
+          <td class="symbol-cell">lim<sub>h→0</sub></td>
+          <td>Límite</td>
+          <td>"límite, cuando h tiende a cero"</td>
+          <td>El valor al que se acerca una expresión conforme h se hace tan pequeña como se quiera, sin llegar a ser exactamente cero.</td>
+        </tr>
+        <tr>
+          <td class="symbol-cell">dx</td>
+          <td>Diferencial de x</td>
+          <td>"diferencial de equis"</td>
+          <td>Un cambio infinitesimal (extremadamente pequeño) en x; es el límite de Δx cuando Δx tiende a cero.</td>
+        </tr>
+        <tr>
+          <td class="symbol-cell">∫</td>
+          <td>Símbolo de integración</td>
+          <td>"integral de…"</td>
+          <td><em>Adelanto:</em> una S alargada (de "suma"). Indica el proceso de acumulación — el inverso exacto de la derivada. Lo estudiaremos a fondo en la próxima sesión.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout note">
+      <p><strong>Dato curioso:</strong> existe una tercera notación, la de Newton, que escribe la derivada de y respecto al tiempo como <strong>ẏ</strong> ("y punto"). Es muy común en física para velocidades y aceleraciones, aunque en este curso usaremos principalmente Lagrange (f') y Leibniz (dy/dx, dx).</p>
+    </div>
+  </section>
+
+  <!-- ===================== REGLAS BÁSICAS ===================== -->
+  <section class="section">
+    <span class="section-label">Recordando el mecanismo</span>
+    <h2 class="section-title">Reglas básicas de derivación</h2>
+
+    <table>
+      <thead>
+        <tr><th>Regla</th><th>Fórmula</th><th>Lectura rápida</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Derivada de una constante</td>
+          <td><code class="text-mono">d/dx [k] = 0</code></td>
+          <td>Una constante no cambia, así que su rapidez de cambio es cero.</td>
+        </tr>
+        <tr>
+          <td>Regla de la potencia</td>
+          <td><code class="text-mono">d/dx [xⁿ] = n·xⁿ⁻¹</code></td>
+          <td>El exponente "baja" a multiplicar y luego se reduce en 1.</td>
+        </tr>
+        <tr>
+          <td>Múltiplo constante</td>
+          <td><code class="text-mono">d/dx [k·f(x)] = k·f'(x)</code></td>
+          <td>Las constantes que multiplican simplemente acompañan a la derivada.</td>
+        </tr>
+        <tr>
+          <td>Suma/resta</td>
+          <td><code class="text-mono">d/dx [f(x) ± g(x)] = f'(x) ± g'(x)</code></td>
+          <td>Se puede derivar término por término.</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ===================== EJEMPLOS ===================== -->
+  <section class="section">
+    <span class="section-label">Manos a la obra</span>
+    <h2 class="section-title">Ejemplos básicos resueltos</h2>
+
+    <div class="example-block">
+      <div class="example-header">Ejemplo 1 · Regla de la potencia</div>
+      <div class="example-body">
+        <div class="example-statement">Derivar: f(x) = x³</div>
+        <ol class="step-list">
+          <li><span class="step-n">1</span><span class="step-content">Identificamos el exponente n = 3.</span></li>
+          <li><span class="step-n">2</span><span class="step-content">Bajamos el exponente a multiplicar: 3·x.</span></li>
+          <li><span class="step-n">3</span><span class="step-content">Restamos 1 al exponente original: x³⁻¹ = x².</span></li>
+        </ol>
+        <div class="result-line">f'(x) = 3x²</div>
+      </div>
+    </div>
+
+    <div class="example-block">
+      <div class="example-header">Ejemplo 2 · Derivada de una constante</div>
+      <div class="example-body">
+        <div class="example-statement">Derivar: f(x) = 7</div>
+        <ol class="step-list">
+          <li><span class="step-n">1</span><span class="step-content">f(x) = 7 es una función constante: nunca cambia, sin importar el valor de x.</span></li>
+          <li><span class="step-n">2</span><span class="step-content">Si nunca cambia, su rapidez de cambio es cero.</span></li>
+        </ol>
+        <div class="result-line">f'(x) = 0</div>
+      </div>
+    </div>
+
+    <div class="example-block">
+      <div class="example-header">Ejemplo 3 · Combinando reglas</div>
+      <div class="example-body">
+        <div class="example-statement">Derivar: f(x) = 4x² − 5x + 2</div>
+        <ol class="step-list">
+          <li><span class="step-n">1</span><span class="step-content">Derivamos término por término (regla de la suma/resta): d/dx[4x²] − d/dx[5x] + d/dx[2].</span></li>
+          <li><span class="step-n">2</span><span class="step-content">4x² → 4·2·x¹ = 8x (potencia + múltiplo constante).</span></li>
+          <li><span class="step-n">3</span><span class="step-content">5x → 5·1·x⁰ = 5 (recuerda que x⁰ = 1).</span></li>
+          <li><span class="step-n">4</span><span class="step-content">2 → 0 (derivada de una constante).</span></li>
+        </ol>
+        <div class="result-line">f'(x) = 8x − 5</div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-rule">
+
+  <!-- ===================== EL PUENTE ===================== -->
+  <section class="section">
+    <span class="section-label">Mirando hacia adelante</span>
+    <h2 class="section-title">El puente: de derivar a integrar</h2>
+
+    <div class="grid-2">
+      <div class="card">
+        <span class="card-title">Lo que ya sabes: derivar</span>
+        <p>Partes de una función F(x) y obtienes su rapidez de cambio f(x) = F'(x). El exponente <em>baja</em> y multiplica: x⁴ → 4x³.</p>
+      </div>
+      <div class="card">
+        <span class="card-title">Lo que viene: integrar</span>
+        <p>Partes de una rapidez de cambio f(x) y reconstruyes la función F(x) que la originó. El exponente <em>sube</em> y divide: x³ → x⁴/4 + C.</p>
+      </div>
+    </div>
+
+    <div class="concept-box">
+      <span class="concept-title">La pregunta que abre la puerta</span>
+      <p>En el Ejemplo 1 de hoy viste que si F(x) = x⁴, entonces F'(x) = 4x³. La pregunta que responderá Cálculo Integral es la inversa: <strong>si ya tengo 4x³, ¿de qué función F(x) provino?</strong> Esa pregunta —y por qué la respuesta nunca es una única función, sino toda una familia— es exactamente el tema de tu próxima clase.</p>
+    </div>
+
+    <p>La notación que usaremos para "deshacer" la derivada es la <strong>integral indefinida</strong>: ∫f(x) dx. Fíjate en el paralelismo: así como <code class="text-mono">dx</code> aparece en la derivada como "un cambio infinitesimal en x", en la integral <code class="text-mono">dx</code> indica con respecto a qué variable estamos acumulando. Es el mismo símbolo, leído en la dirección opuesta.</p>
+  </section>
+
+  <!-- ===================== ACTIVIDAD ===================== -->
+  <section class="section">
+    <span class="section-label">Para practicar antes de mañana</span>
+    <h2 class="section-title">Actividad de repaso</h2>
+    <div class="card">
+      <span class="card-title">Deriva cada función y nombra en voz alta la notación que usaste</span>
+      <ol>
+        <li>f(x) = 5x⁴</li>
+        <li>f(x) = −3x</li>
+        <li>f(x) = 9</li>
+        <li>f(x) = 2x³ − x + 6</li>
+      </ol>
+    </div>
+    <p class="text-muted text-sm">No se entrega ni se califica: es un calentamiento mental. Tráelo resuelto de memoria (o en tu cuaderno) para arrancar con paso firme la Unidad 1 de Cálculo Integral.</p>
+  </section>
+
+  <hr class="section-rule">
+
+  <!-- ===================== CONCLUSIÓN ===================== -->
+  <section class="section">
+    <span class="section-label">Para cerrar</span>
+    <h2 class="section-title">Conclusión</h2>
+    <img src="imagen2.png" alt="Mixtle despidiéndose" class="cierre-mascota">
+    <p>Hoy dejamos absolutamente clara la derivada: qué significa, cómo se escribe de al menos tres formas distintas (Lagrange, Leibniz y, de forma anecdótica, Newton) y cómo se calcula en casos básicos usando las reglas de la constante, la potencia y la suma. Ese dominio de la notación es la base sobre la que se construye todo Cálculo Integral.</p>
+    <p>A partir de mañana invertimos el camino: en vez de preguntar "¿qué tan rápido cambia esta función?", preguntaremos "¿de qué función proviene esta rapidez de cambio?". Esa pregunta tiene su propia notación —la integral indefinida ∫f(x)dx— y su propia sorpresa: la respuesta nunca es una sola función, sino una familia completa. De eso trata la constante de integración C, tema de tu próxima clase.</p>
+  </section>
+
+  <!-- ===================== REFERENCIAS ===================== -->
+  <section class="section">
+    <span class="section-label">Para profundizar</span>
+    <h2 class="section-title">Referencias bibliográficas</h2>
+    <ul class="text-sm">
+      <li>Dawkins, P. (2022). <em>Calculus I Notes: Derivatives.</em> Lamar University. https://tutorial.math.lamar.edu/</li>
+      <li>OpenStax. (2023). <em>Calculus Volume 1.</em> OpenStax. https://openstax.org/details/books/calculus-volume-1</li>
+      <li>MIT OpenCourseWare. (2021). <em>Single Variable Calculus: Differentiation.</em> https://ocw.mit.edu/courses/18-01sc-single-variable-calculus-fall-2010/</li>
+      <li>Khan Academy. (s.f.). <em>Cálculo diferencial.</em> https://www.khanacademy.org/math/differential-calculus</li>
+    </ul>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <span><strong>IEDEP</strong> · Instituto de Educación Digital del Estado de Puebla</span>
+  <span>Cálculo Integral — Mtro. José Armando Vera Rodríguez</span>
+</footer>
+
+</body>
+</html>
