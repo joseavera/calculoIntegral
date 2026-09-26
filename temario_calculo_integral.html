@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Temario del Curso — Cálculo Integral</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="base.css">
+<style>
+  .mascota-flotante { float: right; width: 140px; margin: 0 0 1rem 1.5rem; }
+  @media (max-width: 640px) { .mascota-flotante { float: none; display: block; margin: 0 auto 1rem; } }
+
+  /* ── Ruta de aprendizaje (roadmap de 4 unidades) ─────────── */
+  .roadmap { display: flex; gap: 0; margin: 2rem 0 2.5rem; position: relative; }
+  .roadmap-node { flex: 1; text-align: center; position: relative; padding-top: 2.2rem; }
+  .roadmap-node::before {
+    content: ""; position: absolute; top: 14px; left: 50%; right: -50%;
+    height: 2px; background: var(--border-strong); z-index: 0;
+  }
+  .roadmap-node:first-child::before { display: none; }
+  .roadmap-dot {
+    width: 30px; height: 30px; border-radius: 50%; background: var(--guinda);
+    color: var(--white); font-family: var(--font-ui); font-weight: 700; font-size: .85rem;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto .6rem; position: relative; z-index: 1;
+  }
+  .roadmap-node .rm-title { font-family: var(--font-ui); font-weight: 600; font-size: .85rem; color: var(--guinda-dark); }
+  .roadmap-node .rm-hours { font-family: var(--font-ui); font-size: .72rem; color: var(--ink-muted); margin-top: .15rem; }
+  @media (max-width: 640px) {
+    .roadmap { flex-direction: column; gap: 1.2rem; }
+    .roadmap-node::before { display: none; }
+  }
+
+  /* ── Bloque de unidad ─────────────────────────────────────── */
+  .unit-block { border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; margin: 1.75rem 0; box-shadow: var(--shadow-sm); }
+  .unit-header { background: var(--guinda); color: var(--white); padding: 1rem 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: .5rem; }
+  .unit-header .unit-name { font-family: var(--font-display); font-size: 1.3rem; font-weight: 600; }
+  .unit-header .unit-hours { font-family: var(--font-ui); font-size: .78rem; color: rgba(255,255,255,.8); text-transform: uppercase; letter-spacing: .06em; }
+  .unit-body { background: var(--off-white); padding: 1.4rem 1.6rem; }
+  .unit-body .unit-proposito { font-size: .96rem; color: var(--ink-secondary); font-style: italic; margin-bottom: 1rem; }
+  .unit-subtemas { list-style: none; padding: 0; margin: 0 0 1.1rem; }
+  .unit-subtemas li { padding: .35rem 0 .35rem .1rem; border-bottom: 1px dashed var(--border); font-size: .95rem; }
+  .unit-subtemas li:last-child { border-bottom: none; }
+  .unit-footer { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: .75rem; background: var(--surface); border-top: 1px solid var(--border); padding: .8rem 1.6rem; font-family: var(--font-ui); font-size: .85rem; }
+  .unit-footer .unit-producto { color: var(--ink-secondary); }
+  .unit-footer .unit-peso { color: var(--guinda); font-weight: 700; }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="logo-wrap"><img src="imagen1.png" alt="Logo IEDEP"></div>
+  <div class="header-text">
+    <span class="inst-name">Instituto de Educación Digital del Estado de Puebla</span>
+    <span class="doc-title">Temario del curso · Cálculo Integral</span>
+  </div>
+</header>
+
+<section class="class-hero">
+  <span class="class-label">Licenciatura en Sistemas Computacionales · Cuarto Cuatrimestre</span>
+  <h1>Temario de Cálculo Integral</h1>
+  <span class="class-subtitle">Consulta aquí el contenido completo del curso: las cuatro unidades, sus temas, la forma de evaluación, los recursos y la bibliografía que usaremos a lo largo del cuatrimestre.</span>
+  <div class="meta-row">
+    <div class="meta-item">Programa educativo<span>Licenciatura en Sistemas Computacionales</span></div>
+    <div class="meta-item">Asignatura<span>Cálculo Integral</span></div>
+    <div class="meta-item">Cuatrimestre<span>Cuarto</span></div>
+    <div class="meta-item">Créditos<span>7</span></div>
+    <div class="meta-item">Horas totales<span>112 (32 conducidas + 80 independientes)</span></div>
+  </div>
+</section>
+
+<main class="page-wrapper">
+
+  <!-- ===================== PROPÓSITO ===================== -->
+  <section class="section">
+    <span class="section-label">De un vistazo</span>
+    <h2 class="section-title">Propósito general de la asignatura</h2>
+
+    <img src="imagen2.png" alt="Mixtle, mascota del curso" class="mascota-flotante">
+
+    <p>Estimar el comportamiento de funciones y procesos de acumulación, mediante el cálculo de integrales definidas e indefinidas, con el fin de determinar magnitudes físicas, áreas y volúmenes en modelos de ingeniería.</p>
+    <p>A lo largo del curso también aprenderás a explicar la convergencia de series y sucesiones a partir de los criterios de integración y las sumas de Riemann; a usar modelos matemáticos para fenómenos de cambio continuo mediante técnicas de integración (sustitución, partes, fracciones parciales); y a integrar herramientas computacionales y métodos numéricos para resolver problemas cuya solución analítica es compleja o inexistente.</p>
+
+    <div class="callout note">
+      <p><strong>Sobre las fechas:</strong> este temario organiza el contenido por unidad y tema, sin calendario fijo de sesiones. Cada clase se comparte con su propia fecha conforme avanza el cuatrimestre, para que el ritmo real del grupo — y cualquier ajuste de calendario — quede siempre reflejado con exactitud.</p>
+    </div>
+  </section>
+
+  <!-- ===================== RUTA DE APRENDIZAJE ===================== -->
+  <section class="section">
+    <span class="section-label">La ruta completa</span>
+    <h2 class="section-title">Las cuatro unidades del curso</h2>
+
+    <div class="roadmap">
+      <div class="roadmap-node"><div class="roadmap-dot">1</div><div class="rm-title">Integral Indefinida</div><div class="rm-hours">8 h · 4 temas</div></div>
+      <div class="roadmap-node"><div class="roadmap-dot">2</div><div class="rm-title">Integral Definida</div><div class="rm-hours">8 h · 4 temas</div></div>
+      <div class="roadmap-node"><div class="roadmap-dot">3</div><div class="rm-title">Aplicaciones</div><div class="rm-hours">8 h · 4 temas</div></div>
+      <div class="roadmap-node"><div class="roadmap-dot">4</div><div class="rm-title">Series y EDO</div><div class="rm-hours">8 h · 4 temas</div></div>
+    </div>
+  </section>
+
+  <hr class="section-rule">
+
+  <!-- ===================== UNIDAD 1 ===================== -->
+  <section class="section">
+    <div class="unit-block">
+      <div class="unit-header">
+        <span class="unit-name">Unidad 1 · La Integral Indefinida y Técnicas de Integración</span>
+        <span class="unit-hours">8 h docentes · 20 h independientes</span>
+      </div>
+      <div class="unit-body">
+        <p class="unit-proposito">Interpretar el concepto de la antiderivada mediante los diversos métodos de integración analítica, con el fin de obtener funciones generales que modelan procesos de cambio.</p>
+        <ul class="unit-subtemas">
+          <li>1.1 La constante de integración y propiedades de la integral</li>
+          <li>1.2 Integración por sustitución (cambio de variable)</li>
+          <li>1.3 Integración por partes y potencias trigonométricas</li>
+          <li>1.4 Integración por fracciones parciales y sustitución trigonométrica</li>
+        </ul>
+      </div>
+      <div class="unit-footer">
+        <span class="unit-producto">Producto de aprendizaje: problemario técnico de integrales indefinidas</span>
+        <span class="unit-peso">25% de la calificación</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== UNIDAD 2 ===================== -->
+  <section class="section">
+    <div class="unit-block">
+      <div class="unit-header">
+        <span class="unit-name">Unidad 2 · La Integral Definida y el Teorema Fundamental</span>
+        <span class="unit-hours">8 h docentes · 20 h independientes</span>
+      </div>
+      <div class="unit-body">
+        <p class="unit-proposito">Calcular el valor acumulado de una función en un intervalo tomando como base el teorema fundamental del cálculo y las sumas de Riemann, orientado a su aplicación en el cálculo de áreas bajo la curva.</p>
+        <ul class="unit-subtemas">
+          <li>2.1 La integral de Riemann y el área bajo la curva</li>
+          <li>2.2 Teorema Fundamental del Cálculo (Partes I y II)</li>
+          <li>2.3 Propiedades de la integral definida y valor promedio</li>
+          <li>2.4 Integrales impropias y su convergencia</li>
+        </ul>
+      </div>
+      <div class="unit-footer">
+        <span class="unit-producto">Producto de aprendizaje: reporte de análisis de caso (integral definida y Teorema Fundamental)</span>
+        <span class="unit-peso">25% de la calificación</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== UNIDAD 3 ===================== -->
+  <section class="section">
+    <div class="unit-block">
+      <div class="unit-header">
+        <span class="unit-name">Unidad 3 · Aplicaciones de la Integral</span>
+        <span class="unit-hours">8 h docentes · 20 h independientes</span>
+      </div>
+      <div class="unit-body">
+        <p class="unit-proposito">Emplear la utilidad del cálculo en problemas físicos y geométricos haciendo uso de planteamientos de ingeniería, con el propósito de determinar volúmenes, longitudes y centros de masa.</p>
+        <ul class="unit-subtemas">
+          <li>3.1 Cálculo de áreas entre curvas</li>
+          <li>3.2 Volúmenes de sólidos de revolución (discos y arandelas)</li>
+          <li>3.3 Longitud de arco y áreas de superficies de revolución</li>
+          <li>3.4 Aplicaciones en física (trabajo, presión y centros de masa)</li>
+        </ul>
+      </div>
+      <div class="unit-footer">
+        <span class="unit-producto">Producto de aprendizaje: reporte de simulación 3D de sólidos de revolución</span>
+        <span class="unit-peso">25% de la calificación</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== UNIDAD 4 ===================== -->
+  <section class="section">
+    <div class="unit-block">
+      <div class="unit-header">
+        <span class="unit-name">Unidad 4 · Series e Introducción a las Ecuaciones Diferenciales</span>
+        <span class="unit-hours">8 h docentes · 20 h independientes</span>
+      </div>
+      <div class="unit-body">
+        <p class="unit-proposito">Usar la estructura de funciones expresadas como sumas infinitas por medio del estudio de series de potencias, a efectos de comprender la base de las aproximaciones numéricas en computación.</p>
+        <ul class="unit-subtemas">
+          <li>4.1 Sucesiones y series numéricas (convergencia y divergencia)</li>
+          <li>4.2 Series de potencias y series de Taylor/Maclaurin</li>
+          <li>4.3 Conceptos básicos de ecuaciones diferenciales ordinarias (EDO)</li>
+          <li>4.4 Integración numérica (regla del Trapecio y Simpson 1/3)</li>
+        </ul>
+      </div>
+      <div class="unit-footer">
+        <span class="unit-producto">Producto de aprendizaje: manual técnico de algoritmos de integración numérica y series</span>
+        <span class="unit-peso">25% de la calificación</span>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-rule">
+
+  <!-- ===================== EVALUACIÓN ===================== -->
+  <section class="section">
+    <span class="section-label">Cómo se califica</span>
+    <h2 class="section-title">Criterios de evaluación</h2>
+    <p>Se privilegia la evaluación formativa: cada unidad se acredita con un producto de aprendizaje específico, y la calificación final es el promedio de los cuatro.</p>
+    <table>
+      <thead><tr><th>Producto de aprendizaje</th><th>Unidad</th><th>Ponderación</th></tr></thead>
+      <tbody>
+        <tr><td>Problemario técnico de integrales</td><td>1</td><td>25%</td></tr>
+        <tr><td>Reporte de análisis de caso (integral definida y Teorema Fundamental)</td><td>2</td><td>25%</td></tr>
+        <tr><td>Reporte de simulación 3D</td><td>3</td><td>25%</td></tr>
+        <tr><td>Manual técnico de algoritmos</td><td>4</td><td>25%</td></tr>
+        <tr><td><strong>Total</strong></td><td></td><td><strong>100%</strong></td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ===================== RECURSOS ===================== -->
+  <section class="section">
+    <span class="section-label">Con qué trabajaremos</span>
+    <h2 class="section-title">Recursos tecnológicos</h2>
+    <div class="card">
+      <ul>
+        <li>Repositorios digitales: biblioteca virtual y recursos educativos abiertos de revistas académicas.</li>
+        <li>Apps educativas gratuitas.</li>
+        <li>Sistemas de evaluación: Google Forms.</li>
+        <li>Recursos de comunicación: correo electrónico.</li>
+       
+      </ul>
+    </div>
+  </section>
+
+  <!-- ===================== BIBLIOGRAFÍA ===================== -->
+  <section class="section">
+    <span class="section-label">Para consultar</span>
+    <h2 class="section-title">Bibliografía por unidad</h2>
+
+    <div class="grid-2">
+      <div class="card">
+        <span class="card-title">Unidad 1</span>
+        <p class="text-sm">Dawkins, P. (2022). <em>Calculus II Notes: Integration Techniques.</em> Lamar University.</p>
+      </div>
+      <div class="card">
+        <span class="card-title">Unidad 2</span>
+        <p class="text-sm">Guichard, D. (2022). <em>Single Variable Calculus.</em> Whitman College.<br>MIT OpenCourseWare. (2021). <em>Single Variable Calculus: Integration.</em></p>
+      </div>
+      <div class="card">
+        <span class="card-title">Unidad 3</span>
+        <p class="text-sm">Corral, M. (2021). <em>Calculus: Contexts and Methods.</em> School of Arts &amp; Sciences, Philadelphia.<br>LibreTexts Mathematics. (2024). <em>Geometric Applications of Integration.</em></p>
+      </div>
+      <div class="card">
+        <span class="card-title">Unidad 4</span>
+        <p class="text-sm">Boelkins, M., Austin, D. y Schlicker, S. (2022). <em>Active Calculus.</em> Grand Valley State University.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="card-title">Bibliografía complementaria</span>
+      <ul class="text-sm">
+        <li>Lamar University — Tutorial de matemáticas: https://tutorial.math.lamar.edu/</li>
+        <li>MIT OpenCourseWare — Single Variable Calculus: https://ocw.mit.edu/courses/18-01sc-single-variable-calculus-fall-2010/</li>
+        <li>OpenStax — Calculus Volume 2: https://openstax.org/details/books/calculus-volume-2</li>
+        <li>Khan Academy — Cálculo integral: https://www.khanacademy.org/math/integral-calculus</li>
+      </ul>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <span><strong>IEDEP</strong> · Instituto de Educación Digital del Estado de Puebla</span>
+  <span>Cálculo Integral — Mtro. José Armando Vera Rodríguez</span>
+</footer>
+
+</body>
+</html>
