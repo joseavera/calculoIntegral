@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Repaso previo a la evaluación: Derivadas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --guinda:#490b58; --guinda-dark:#37073f; --guinda-light:#F5E8EE; --guinda-rule:#C85070;
+  --white:#FFFFFF; --off-white:#FAFAFA; --surface:#F6F4F4; --border:#E2D8DA; --border-strong:#C8B4BA;
+  --ink:#1A1215; --ink-secondary:#5C4850; --ink-muted:#8C7880; --ok:#1f7a4d;
+  --font-display:'Cormorant Garamond',Georgia,serif; --font-body:'Source Serif 4',Georgia,serif;
+  --font-ui:'Inter','Segoe UI',system-ui,sans-serif; --font-mono:'JetBrains Mono','Courier New',monospace;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:var(--white);color:var(--ink);font-family:var(--font-body);font-size:17px;line-height:1.7}
+h1,h2,h3{font-family:var(--font-display);font-weight:700;color:var(--ink);margin:0 0 .6rem}
+h1{font-size:2.1rem;line-height:1.15;color:var(--guinda)}
+h2{font-size:1.5rem;color:var(--guinda);border-bottom:2px solid var(--guinda-light);padding-bottom:.3rem;margin-top:2.2rem}
+.page{max-width:820px;margin:0 auto;padding:0 1.5rem 3rem}
+.site-header{border-bottom:3px solid var(--guinda);padding:.9rem 1.5rem;display:flex;align-items:center;gap:.9rem}
+.site-header img{width:46px;height:46px;border-radius:50%;object-fit:cover}
+.site-header .inst{font-family:var(--font-display);font-size:1.1rem;font-weight:700;color:var(--guinda);display:block;line-height:1.2}
+.site-header .sub{font-family:var(--font-ui);font-size:.8rem;color:var(--ink-secondary)}
+.hero{display:flex;gap:1.2rem;align-items:center;justify-content:space-between;margin:1.8rem 0 1rem}
+.hero img.mascot{width:110px;height:auto;flex-shrink:0}
+.kicker{font-family:var(--font-ui);font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--guinda-rule);font-weight:700}
+.meta{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:.6rem;margin:1rem 0 1.5rem}
+.meta div{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:.55rem .8rem;font-family:var(--font-ui);font-size:.85rem}
+.meta b{display:block;font-size:.68rem;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-muted);margin-bottom:.1rem}
+.comp{background:var(--guinda-light);border-left:4px solid var(--guinda);border-radius:0 10px 10px 0;padding:1rem 1.2rem;margin:1rem 0}
+.comp ul{margin:.4rem 0 0;padding-left:1.2rem}
+.callout{background:#FFF8E6;border:1px solid #F0D9A0;border-radius:10px;padding:.9rem 1.1rem;margin:1rem 0;font-size:.95rem}
+.callout b.t{font-family:var(--font-ui);font-size:.75rem;text-transform:uppercase;letter-spacing:.08em;color:#8a6410;display:block;margin-bottom:.2rem}
+.formula{background:var(--off-white);border:1px solid var(--border);border-left:4px solid var(--guinda);border-radius:0 8px 8px 0;padding:.8rem 1.1rem;margin:.8rem 0;font-family:var(--font-mono);font-size:.95rem;overflow-x:auto}
+table{width:100%;border-collapse:collapse;margin:1rem 0;font-size:.92rem;font-family:var(--font-ui)}
+th,td{text-align:left;padding:.55rem .7rem;border-bottom:1px solid var(--border);vertical-align:top}
+th{background:var(--guinda);color:#fff;font-size:.75rem;text-transform:uppercase;letter-spacing:.06em}
+td.m{font-family:var(--font-mono);white-space:nowrap}
+.table-wrap{overflow-x:auto}
+figure{margin:1.2rem 0;text-align:center}
+figure figcaption{font-family:var(--font-ui);font-size:.8rem;color:var(--ink-muted);margin-top:.3rem}
+.ex{background:var(--white);border:1px solid var(--border);border-radius:10px;margin:.7rem 0;overflow:hidden}
+.ex .q{padding:.8rem 1rem;font-weight:600}
+.ex .q span.n{font-family:var(--font-ui);color:var(--guinda);margin-right:.4rem}
+details{border-top:1px solid var(--border);background:var(--surface)}
+summary{cursor:pointer;padding:.55rem 1rem;font-family:var(--font-ui);font-size:.85rem;font-weight:600;color:var(--guinda)}
+details .sol{padding:.2rem 1rem .9rem;font-size:.95rem}
+details .sol .res{display:inline-block;margin-top:.3rem;background:var(--guinda);color:#fff;border-radius:6px;padding:.15rem .6rem;font-family:var(--font-mono);font-size:.9rem}
+ol.check{padding-left:1.2rem}
+.site-footer{background:var(--guinda);color:rgba(255,255,255,.8);padding:1.2rem 1.5rem;font-family:var(--font-ui);font-size:.8rem;text-align:center}
+.site-footer img{width:54px;height:auto;display:block;margin:0 auto .5rem}
+.refs{font-size:.9rem}.refs li{margin-bottom:.4rem}
+@media print{details{display:block}details>summary{display:none}details .sol{display:block}}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <img src="imagen1.png" alt="Logotipo Mixtle" onerror="this.style.display='none'">
+  <div>
+    <span class="inst">Instituto de Educación Digital del Estado de Puebla</span>
+    <span class="sub">Material de repaso · Cálculo Integral</span>
+  </div>
+</header>
+
+<main class="page">
+
+  <section class="hero">
+    <div>
+      <span class="kicker">Repaso previo a la evaluación</span>
+      <h1>Derivadas: lo esencial en una sola página</h1>
+      <p style="margin:.3rem 0 0;color:var(--ink-secondary)">Revisa notación, reglas e interpretación, y practica con ejercicios de autocomprobación antes de presentar tu evaluación.</p>
+    </div>
+    <img class="mascot" src="imagen2.png" alt="Mascota Mixtle" onerror="this.style.display='none'">
+  </section>
+
+  <div class="meta">
+    <div><b>Programa educativo</b>Licenciatura en Sistemas Computacionales</div>
+    <div><b>Asignatura</b>Cálculo Integral</div>
+    <div><b>Unidad</b>Sesión puente · Repaso de Cálculo Diferencial</div>
+    <div><b>Tema</b>Repaso de derivadas</div>
+    <div><b>Fecha</b>Previa a la evaluación</div>
+    <div><b>Tiempo de estudio sugerido</b>20 a 30 minutos</div>
+  </div>
+
+  <div class="comp">
+    <strong>Competencias a desarrollar</strong>
+    <ul>
+      <li>Identificar y leer correctamente la notación de la derivada (f'(x), dy/dx, dP/dt).</li>
+      <li>Aplicar las reglas de derivación básicas: constante, potencia, constante por función y suma o resta.</li>
+      <li>Interpretar la derivada como pendiente de la recta tangente y como razón de cambio en contextos de Sistemas Computacionales.</li>
+      <li>Reconocer que integrar es la operación inversa de derivar.</li>
+    </ul>
+  </div>
+
+  <h2>1. La notación: cómo se lee y qué significa</h2>
+  <div class="table-wrap">
+  <table>
+    <tr><th>Símbolo</th><th>Se lee</th><th>Significa</th></tr>
+    <tr><td class="m">f'(x)</td><td>"f prima de x"</td><td>La derivada de f respecto a x (notación de Lagrange).</td></tr>
+    <tr><td class="m">dy/dx</td><td>"derivada de y respecto a x"</td><td>Qué tan rápido cambia y cuando x cambia (notación de Leibniz).</td></tr>
+    <tr><td class="m">d/dx [ ]</td><td>"derivada respecto a x de..."</td><td>Operador: indica "deriva lo que está entre corchetes".</td></tr>
+    <tr><td class="m">dP/dt</td><td>"derivada de P respecto a t"</td><td>Razón de cambio de P en el tiempo (por ejemplo, consumo de CPU por segundo).</td></tr>
+    <tr><td class="m">&Delta;y / &Delta;x</td><td>"delta y entre delta x"</td><td>Cambio promedio en un intervalo: la derivada es su límite cuando &Delta;x tiende a 0.</td></tr>
+    <tr><td class="m">&int; f(x) dx</td><td>"integral de f de x diferencial de x"</td><td>Operación inversa: recupera la función original a partir de su derivada.</td></tr>
+  </table>
+  </div>
+  <div class="callout"><b class="t">Analogía</b>Piensa en un videojuego: la posición del personaje es la función; el velocímetro marca su derivada (qué tan rápido cambia la posición); el odómetro acumulado es la integral.</div>
+
+  <h2>2. Reglas de derivación básicas</h2>
+  <div class="table-wrap">
+  <table>
+    <tr><th>Regla</th><th>Fórmula</th><th>Ejemplo</th></tr>
+    <tr><td>Constante</td><td class="m">d/dx [c] = 0</td><td class="m">d/dx [9] = 0</td></tr>
+    <tr><td>Potencia</td><td class="m">d/dx [x<sup>n</sup>] = n&middot;x<sup>n&minus;1</sup></td><td class="m">d/dx [x<sup>5</sup>] = 5x<sup>4</sup></td></tr>
+    <tr><td>Constante por función</td><td class="m">d/dx [c&middot;f(x)] = c&middot;f'(x)</td><td class="m">d/dx [4x<sup>3</sup>] = 12x<sup>2</sup></td></tr>
+    <tr><td>Suma o resta</td><td class="m">d/dx [f &plusmn; g] = f' &plusmn; g'</td><td class="m">d/dx [x<sup>2</sup> + 3x] = 2x + 3</td></tr>
+  </table>
+  </div>
+  <div class="callout"><b class="t">Receta de la potencia</b>Baja el exponente como multiplicador y réstale 1 al exponente. Si el término es solo "x", su derivada es 1; si es una constante sola, su derivada es 0.</div>
+
+  <h2>3. Interpretación: pendiente y razón de cambio</h2>
+  <p>La derivada en un punto es la <strong>pendiente de la recta tangente</strong> a la gráfica en ese punto. Si la derivada es positiva, la función crece; si es negativa, decrece; si es cero, hay un punto donde deja de subir o bajar.</p>
+  <figure>
+    <svg viewBox="0 0 360 190" width="100%" style="max-width:420px" role="img" aria-label="Curva con recta tangente">
+      <line x1="30" y1="160" x2="340" y2="160" stroke="#8C7880" stroke-width="1.5"/>
+      <line x1="30" y1="160" x2="30" y2="15" stroke="#8C7880" stroke-width="1.5"/>
+      <path d="M40 150 Q150 140 210 90 T330 30" fill="none" stroke="#490b58" stroke-width="3"/>
+      <line x1="120" y1="148" x2="300" y2="62" stroke="#C85070" stroke-width="2" stroke-dasharray="6 4"/>
+      <circle cx="195" cy="106" r="5" fill="#C85070"/>
+      <text x="205" y="128" font-family="Inter,sans-serif" font-size="12" fill="#5C4850">punto de tangencia</text>
+      <text x="60" y="60" font-family="Inter,sans-serif" font-size="12" fill="#C85070">recta tangente: pendiente = f'(x)</text>
+      <text x="300" y="178" font-family="Inter,sans-serif" font-size="12" fill="#5C4850">x</text>
+      <text x="12" y="28" font-family="Inter,sans-serif" font-size="12" fill="#5C4850">y</text>
+    </svg>
+    <figcaption>La inclinación de la recta tangente es el valor de la derivada en ese punto.</figcaption>
+  </figure>
+  <div class="callout"><b class="t">No olvides las unidades</b>Si T(n) está en milisegundos y n en usuarios, T'(n) se mide en milisegundos por usuario. En contextos aplicados, siempre acompaña el resultado con su unidad e interpretación.</div>
+
+  <h2>4. Conexión con el Cálculo Integral</h2>
+  <p>Derivar y integrar son operaciones inversas. Si derivas x<sup>3</sup> obtienes 3x<sup>2</sup>; por lo tanto, la función cuya derivada es 3x<sup>2</sup> es x<sup>3</sup> (más una constante C, porque la derivada de cualquier constante es 0). En este curso usaremos justamente esa idea: <em>recuperar la función original a partir de su razón de cambio</em>.</p>
+
+  <h2>5. Autocomprobación</h2>
+  <p>Resuelve primero en tu cuaderno con procedimiento completo y después abre la solución para comparar.</p>
+
+  <div class="ex"><div class="q"><span class="n">1.</span>Deriva f(x) = 7x<sup>5</sup></div>
+    <details><summary>Ver solución</summary><div class="sol">Regla de la potencia con constante: 7 &middot; 5 &middot; x<sup>5&minus;1</sup> = 35x<sup>4</sup>.<br><span class="res">f'(x) = 35x<sup>4</sup></span></div></details></div>
+
+  <div class="ex"><div class="q"><span class="n">2.</span>Deriva g(t) = t<sup>4</sup> &minus; 6t<sup>2</sup> + 9</div>
+    <details><summary>Ver solución</summary><div class="sol">Se deriva término a término: t<sup>4</sup> &rarr; 4t<sup>3</sup>; &minus;6t<sup>2</sup> &rarr; &minus;12t; 9 &rarr; 0.<br><span class="res">g'(t) = 4t<sup>3</sup> &minus; 12t</span></div></details></div>
+
+  <div class="ex"><div class="q"><span class="n">3.</span>El costo mensual de un servicio en la nube es C(x) = 0.5x<sup>2</sup> + 3x + 100 (en pesos), donde x son los GB almacenados. Calcula C'(x) y evalúa C'(10).</div>
+    <details><summary>Ver solución</summary><div class="sol">C'(x) = 0.5 &middot; 2x + 3 + 0 = x + 3. Al evaluar en x = 10: C'(10) = 13.<br><span class="res">C'(10) = 13 pesos por GB</span><br>Interpretación: al tener 10 GB almacenados, cada GB adicional cuesta aproximadamente 13 pesos más.</div></details></div>
+
+  <div class="ex"><div class="q"><span class="n">4.</span>La latencia de una API es L(u) = 3u<sup>2</sup> + 2u (en ms), con u usuarios simultáneos. ¿A qué razón cambia la latencia cuando hay 5 usuarios?</div>
+    <details><summary>Ver solución</summary><div class="sol">L'(u) = 6u + 2. Evaluando: L'(5) = 6(5) + 2 = 32.<br><span class="res">L'(5) = 32 ms por usuario</span></div></details></div>
+
+  <div class="ex"><div class="q"><span class="n">5.</span>Si f'(x) = &minus;4 en cierto punto, ¿qué indica sobre la gráfica de f en ese punto?</div>
+    <details><summary>Ver solución</summary><div class="sol">La pendiente de la tangente es negativa, por lo tanto la función está <strong>decreciendo</strong> en ese punto (baja 4 unidades de y por cada unidad que avanza x).</div></details></div>
+
+  <div class="ex"><div class="q"><span class="n">6.</span>¿Qué función tiene como derivada 2x? ¿Y por qué la respuesta no es única?</div>
+    <details><summary>Ver solución</summary><div class="sol">x<sup>2</sup> cumple, pues d/dx [x<sup>2</sup>] = 2x. Pero x<sup>2</sup> + 5 o x<sup>2</sup> &minus; 3 también, porque la derivada de una constante es 0.<br><span class="res">x<sup>2</sup> + C</span></div></details></div>
+
+  <h2>6. Antes de iniciar tu evaluación</h2>
+  <ol class="check">
+    <li>Ten a la mano papel y lápiz para realizar tus procedimientos.</li>
+    <li>La evaluación tiene 5 preguntas con escenarios de Sistemas Computacionales y un límite de 20 minutos.</li>
+    <li>El orden de preguntas y opciones es distinto para cada alumno.</li>
+    <li>No cambies de pestaña ni de ventana: cada salida se registra como infracción.</li>
+    <li>No actualices la página: cada recarga se contabiliza como un intento adicional.</li>
+    <li>Lee con calma cada escenario: identifica qué función se da, qué se pide y en qué unidades.</li>
+  </ol>
+
+  <h2>Conclusión</h2>
+  <p>La derivada mide cómo cambia una cantidad respecto a otra. Con la notación clara, las cuatro reglas básicas y el cuidado de interpretar unidades, puedes resolver la mayoría de los problemas de esta sesión. Además, ya conoces la idea central que abre la puerta al Cálculo Integral: integrar es deshacer una derivada.</p>
+
+  <h2>Referencias bibliográficas</h2>
+  <ul class="refs">
+    <li>Dawkins, P. (2022). <em>Paul's Online Math Notes: Calculus I</em>. Lamar University. https://tutorial.math.lamar.edu/Classes/CalcI/CalcI.aspx</li>
+    <li>OpenStax. (2016). <em>Calculus Volume 1</em>. Rice University. https://openstax.org/details/books/calculus-volume-1</li>
+    <li>MIT OpenCourseWare. (2010). <em>Single Variable Calculus (18.01SC)</em>. Massachusetts Institute of Technology. https://ocw.mit.edu</li>
+    <li>Khan Academy. (s. f.). <em>Cálculo diferencial</em>. https://es.khanacademy.org/math/differential-calculus</li>
+  </ul>
+
+</main>
+
+<footer class="site-footer">
+  <img src="imagen2.png" alt="Mascota Mixtle" onerror="this.style.display='none'">
+  Instituto de Educación Digital del Estado de Puebla · Cálculo Integral · Mtro. José Armando Vera Rodríguez
+</footer>
+
+</body>
+</html>
