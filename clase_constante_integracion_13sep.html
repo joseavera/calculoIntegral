@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clase: La Constante de Integración y Propiedades de la Integral — Cálculo Integral</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="base.css">
+<style>
+  /* Ajustes puntuales exclusivos de esta clase (no modifican base.css) */
+  .mascota-flotante {
+    float: right;
+    width: 150px;
+    margin: 0 0 1rem 1.5rem;
+  }
+  @media (max-width: 640px) {
+    .mascota-flotante { float: none; display: block; margin: 0 auto 1rem; }
+  }
+  .mixtle-quote {
+    display: flex;
+    gap: 1.1rem;
+    align-items: center;
+    background: var(--guinda-light);
+    border: 1px solid #D8A8BA;
+    border-radius: var(--radius-lg);
+    padding: 1.1rem 1.4rem;
+    margin: 1.5rem 0;
+  }
+  .mixtle-quote img { width: 64px; height: auto; flex-shrink: 0; }
+  .mixtle-quote p { margin-bottom: 0; font-size: .97rem; font-style: italic; color: var(--ink-secondary); }
+  .cierre-mascota {
+    display: block;
+    width: 130px;
+    margin: 0 auto 1rem;
+  }
+  svg text { font-family: var(--font-ui); }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="logo-wrap"><img src="imagen1.png" alt="Logo IEDEP"></div>
+  <div class="header-text">
+    <span class="inst-name">Instituto de Educación Digital del Estado de Puebla</span>
+    <span class="doc-title">Material de clase · Cálculo Integral</span>
+  </div>
+</header>
+
+<section class="class-hero">
+  <span class="class-label">Licenciatura en Sistemas Computacionales · Cuarto Cuatrimestre</span>
+  <h1>La Constante de Integración y las Propiedades de la Integral Indefinida</h1>
+  <span class="class-subtitle">Sesión 1 de la Unidad 1: descubriendo cómo "deshacer" una derivada y por qué siempre aparece una constante misteriosa.</span>
+  <div class="meta-row">
+    <div class="meta-item">Programa educativo<span>Licenciatura en Sistemas Computacionales</span></div>
+    <div class="meta-item">Asignatura<span>Cálculo Integral</span></div>
+    <div class="meta-item">Unidad<span>1. La Integral Indefinida y Técnicas de Integración</span></div>
+    <div class="meta-item">Tema<span>1.1 La constante de integración y propiedades de la integral</span></div>
+    <div class="meta-item">Fecha<span>13 de septiembre de 2026</span></div>
+  </div>
+</section>
+
+<main class="page-wrapper">
+
+  <!-- ===================== COMPETENCIAS ===================== -->
+  <section class="section">
+    <span class="section-label">Punto de partida</span>
+    <h2 class="section-title">Competencias a desarrollar</h2>
+
+    <div class="competency-card">
+      <span class="comp-num">🎯</span>
+      <span class="comp-text"><strong>Competencia de la unidad:</strong> Interpretar el concepto de la antiderivada mediante los diversos métodos de integración analítica, con el fin de obtener funciones generales que modelan procesos de cambio.</span>
+    </div>
+    <div class="competency-card">
+      <span class="comp-num">01</span>
+      <span class="comp-text">Reconocer la integral indefinida como el proceso inverso de la derivación y explicar qué representa una antiderivada.</span>
+    </div>
+    <div class="competency-card">
+      <span class="comp-num">02</span>
+      <span class="comp-text">Justificar la necesidad de la constante de integración <em>C</em> a partir del comportamiento de la derivada de una constante.</span>
+    </div>
+    <div class="competency-card">
+      <span class="comp-num">03</span>
+      <span class="comp-text">Aplicar las propiedades básicas de la integral indefinida (constante, potencia y linealidad) para resolver integrales algebraicas sencillas.</span>
+    </div>
+  </section>
+
+  <hr class="section-rule">
+
+  <!-- ===================== INTRODUCCIÓN / ANALOGÍA ===================== -->
+  <section class="section">
+    <span class="section-label">Para entrar en calor</span>
+    <h2 class="section-title">¿Qué significa "integrar"?</h2>
+
+    <img src="imagen2.png" alt="Mixtle, mascota del curso" class="mascota-flotante">
+
+    <p>Durante el cuatrimestre anterior aprendiste a <strong>derivar</strong>: dada una función que describe una posición, una ganancia o cualquier cantidad que cambia, la derivada te dice qué tan rápido cambia en cada instante. La integral indefinida hace el camino inverso: parte de esa "rapidez de cambio" y reconstruye la función original.</p>
+
+    <div class="mixtle-quote">
+      <img src="imagen2.png" alt="Mixtle">
+      <p>"Piensa en mí como tu copiloto: si la derivada es el velocímetro del auto, la integral es el odómetro. Uno te dice qué tan rápido vas en este instante; el otro, cuánta distancia has recorrido en total."</p>
+    </div>
+
+    <div class="concept-box">
+      <span class="concept-title">Analogía: velocímetro y odómetro</span>
+      <p>Imagina que subes a un auto y solo puedes ver el <strong>velocímetro</strong> (la derivada, la rapidez en cada momento). Si quieres saber la <strong>distancia total recorrida</strong> (la función original), tienes que "acumular" esa velocidad a lo largo del tiempo — eso es integrar.</p>
+      <p style="margin-top:.6rem;">Pero hay un detalle: el velocímetro nunca te dice <em>desde dónde</em> partiste. Pudiste salir del kilómetro 0 o del kilómetro 40; la velocidad registrada habría sido idéntica. Esa información perdida — el punto de partida — es exactamente lo que representa la <strong>constante de integración C</strong>.</p>
+    </div>
+  </section>
+
+  <!-- ===================== DEFINICIÓN FORMAL ===================== -->
+  <section class="section">
+    <span class="section-label">Formalizando la idea</span>
+    <h2 class="section-title">Antiderivada e integral indefinida</h2>
+
+    <div class="concept-box">
+      <span class="concept-title">Definición</span>
+      <p>Si <strong>F'(x) = f(x)</strong> para todo x en un intervalo, decimos que <strong>F(x) es una antiderivada (o primitiva)</strong> de f(x).</p>
+    </div>
+
+    <p>Como la derivada de cualquier constante es cero, si F(x) es una antiderivada de f(x), entonces <strong>F(x) + C</strong> también lo es, para cualquier valor de C. Es decir, no existe una sola antiderivada, sino una <strong>familia infinita de funciones</strong> que difieren únicamente por un desplazamiento vertical.</p>
+
+    <div class="formula-block">
+      <code class="formula">∫ f(x) dx&nbsp; =&nbsp; F(x) + C</code>
+      <span class="formula-note">Se lee: "la integral indefinida de f(x) con respecto a x es F(x) más una constante C".</span>
+    </div>
+
+    <figure>
+      <svg viewBox="0 0 560 260" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:520px;background:#FAFAFA;border:1px solid #E2D8DA;border-radius:10px;">
+        <!-- ejes -->
+        <line x1="40" y1="20" x2="40" y2="230" stroke="#C8B4BA" stroke-width="1.5"/>
+        <line x1="20" y1="210" x2="540" y2="210" stroke="#C8B4BA" stroke-width="1.5"/>
+        <!-- familia de parábolas desplazadas: y = x^2/28 + k -->
+        <path d="M 60,150 Q 300,10 520,150" fill="none" stroke="#7B1034" stroke-width="2.5"/>
+        <path d="M 60,180 Q 300,40 520,180" fill="none" stroke="#C85070" stroke-width="2"/>
+        <path d="M 60,205 Q 300,65 520,205" fill="none" stroke="#C85070" stroke-width="2" stroke-dasharray="6 5"/>
+        <text x="470" y="140" fill="#7B1034" font-size="14" font-weight="600">F(x) + 2</text>
+        <text x="470" y="172" fill="#C85070" font-size="14">F(x) + 0</text>
+        <text x="470" y="200" fill="#C85070" font-size="14">F(x) − 2</text>
+        <text x="150" y="245" fill="#5C4850" font-size="13">Misma "forma", distinto valor de C → curvas paralelas</text>
+      </svg>
+      <figcaption>Todas las curvas tienen exactamente la misma pendiente en cada punto x (la misma derivada); solo cambia su altura vertical, definida por C.</figcaption>
+    </figure>
+  </section>
+
+  <hr class="section-rule">
+
+  <!-- ===================== PROPIEDADES ===================== -->
+  <section class="section">
+    <span class="section-label">Herramientas básicas</span>
+    <h2 class="section-title">Propiedades de la integral indefinida</h2>
+
+    <p>Antes de resolver integrales más elaboradas (sustitución, partes, fracciones parciales), necesitamos dominar estas cuatro propiedades: son la base algebraica de todo lo que sigue en la unidad.</p>
+
+    <table>
+      <thead>
+        <tr><th>Propiedad</th><th>Fórmula</th><th>Lectura rápida</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Integral de una constante</td>
+          <td><code class="text-mono">∫ k dx = kx + C</code></td>
+          <td>La antiderivada de un número fijo es ese número multiplicado por x.</td>
+        </tr>
+        <tr>
+          <td>Regla de la potencia</td>
+          <td><code class="text-mono">∫ xⁿ dx = xⁿ⁺¹ / (n+1) + C</code>, n ≠ −1</td>
+          <td>Sube el exponente en 1 y divide entre el nuevo exponente.</td>
+        </tr>
+        <tr>
+          <td>Múltiplo constante</td>
+          <td><code class="text-mono">∫ k·f(x) dx = k ∫ f(x) dx</code></td>
+          <td>Las constantes "salen" de la integral sin cambiar nada más.</td>
+        </tr>
+        <tr>
+          <td>Linealidad (suma/resta)</td>
+          <td><code class="text-mono">∫ [f(x) ± g(x)] dx = ∫f(x)dx ± ∫g(x)dx</code></td>
+          <td>Se puede integrar término por término.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout note">
+      <p><strong>Importante:</strong> la regla de la potencia no aplica cuando n = −1 (es decir, para ∫ x⁻¹ dx); ese caso especial se resuelve con logaritmo natural y lo veremos más adelante en el curso.</p>
+    </div>
+  </section>
+
+  <!-- ===================== EJEMPLOS RESUELTOS ===================== -->
+  <section class="section">
+    <span class="section-label">Manos a la obra</span>
+    <h2 class="section-title">Ejemplos paso a paso</h2>
+
+    <div class="example-block">
+      <div class="example-header">Ejemplo 1 · Integral de una constante</div>
+      <div class="example-body">
+        <div class="example-statement">Resolver: ∫ 5 dx</div>
+        <ol class="step-list">
+          <li><span class="step-n">1</span><span class="step-content">Identificamos que estamos integrando una constante k = 5.</span></li>
+          <li><span class="step-n">2</span><span class="step-content">Aplicamos la regla de la constante: ∫ k dx = kx + C.</span></li>
+        </ol>
+        <div class="result-line">∫ 5 dx = 5x + C</div>
+      </div>
+    </div>
+
+    <div class="example-block">
+      <div class="example-header">Ejemplo 2 · Regla de la potencia</div>
+      <div class="example-body">
+        <div class="example-statement">Resolver: ∫ x⁴ dx</div>
+        <ol class="step-list">
+          <li><span class="step-n">1</span><span class="step-content">Identificamos el exponente n = 4.</span></li>
+          <li><span class="step-n">2</span><span class="step-content">Sumamos 1 al exponente: n + 1 = 5.</span></li>
+          <li><span class="step-n">3</span><span class="step-content">Dividimos entre el nuevo exponente y agregamos C.</span></li>
+        </ol>
+        <div class="result-line">∫ x⁴ dx = x⁵ / 5 + C</div>
+      </div>
+    </div>
+
+    <div class="example-block">
+      <div class="example-header">Ejemplo 3 · Combinando linealidad y potencia</div>
+      <div class="example-body">
+        <div class="example-statement">Resolver: ∫ (3x² − 4x + 7) dx</div>
+        <ol class="step-list">
+          <li><span class="step-n">1</span><span class="step-content">Por linealidad, separamos la integral en tres términos: ∫3x² dx − ∫4x dx + ∫7 dx.</span></li>
+          <li><span class="step-n">2</span><span class="step-content">Sacamos las constantes: 3∫x² dx − 4∫x dx + 7∫1 dx.</span></li>
+          <li><span class="step-n">3</span><span class="step-content">Aplicamos la regla de la potencia a cada término: 3·(x³/3) − 4·(x²/2) + 7x.</span></li>
+          <li><span class="step-n">4</span><span class="step-content">Simplificamos y añadimos una sola constante C al final (no una por término).</span></li>
+        </ol>
+        <div class="result-line">∫ (3x² − 4x + 7) dx = x³ − 2x² + 7x + C</div>
+      </div>
+    </div>
+
+    <div class="callout">
+      <p><strong>Verificación rápida:</strong> siempre puedes comprobar tu resultado derivándolo. Si derivas x³ − 2x² + 7x + C obtienes 3x² − 4x + 7 — exactamente la función original. Esta comprobación es tu mejor amiga en los exámenes.</p>
+    </div>
+  </section>
+
+  <hr class="section-rule">
+
+  <!-- ===================== DERIVADA VS INTEGRAL ===================== -->
+  <section class="section">
+    <span class="section-label">Para no confundir</span>
+    <h2 class="section-title">Derivar vs. integrar, en espejo</h2>
+    <div class="grid-2">
+      <div class="card">
+        <span class="card-title">Derivar (lo que ya sabes)</span>
+        <p>Parte de una función y obtiene su razón de cambio. El exponente <em>baja</em> y se multiplica: x⁵ → 5x⁴.</p>
+      </div>
+      <div class="card">
+        <span class="card-title">Integrar (lo nuevo)</span>
+        <p>Parte de una razón de cambio y reconstruye la función. El exponente <em>sube</em> y se divide: x⁴ → x⁵/5 + C.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== ACTIVIDAD ===================== -->
+  <section class="section">
+    <span class="section-label">Para practicar</span>
+    <h2 class="section-title">Actividad: primer avance del problemario técnico</h2>
+    <div class="card">
+      <span class="card-title">Resuelve y comprueba derivando tu resultado</span>
+      <ol>
+        <li>∫ 8 dx</li>
+        <li>∫ x⁶ dx</li>
+        <li>∫ (2x³ + 5x − 1) dx</li>
+        <li>∫ (−3x² + 4) dx</li>
+      </ol>
+    </div>
+    <p class="text-muted text-sm">Estos ejercicios forman parte del problemario técnico de integrales (25% de la calificación de la unidad). Tráelos resueltos y verificados para la próxima sesión, donde comenzaremos con integración por sustitución.</p>
+  </section>
+
+  <hr class="section-rule">
+
+  <!-- ===================== CONCLUSIÓN ===================== -->
+  <section class="section">
+    <span class="section-label">Para cerrar</span>
+    <h2 class="section-title">Conclusión</h2>
+    <img src="imagen2.png" alt="Mixtle despidiéndose" class="cierre-mascota">
+    <p>Hoy aprendimos que integrar es, en esencia, <strong>deshacer una derivada</strong>: dada una razón de cambio, reconstruimos la función que la originó. Como la derivada de cualquier constante es cero, esa reconstrucción nunca es única — por eso siempre acompañamos el resultado con <strong>+ C</strong>, que representa toda una familia de funciones paralelas entre sí.</p>
+    <p>También practicamos las cuatro propiedades básicas (constante, potencia, múltiplo constante y linealidad), que serán la base para las técnicas más avanzadas que veremos en las próximas sesiones: sustitución, integración por partes y fracciones parciales.</p>
+  </section>
+
+  <!-- ===================== REFERENCIAS ===================== -->
+  <section class="section">
+    <span class="section-label">Para profundizar</span>
+    <h2 class="section-title">Referencias bibliográficas</h2>
+    <ul class="text-sm">
+      <li>Dawkins, P. (2022). <em>Calculus II Notes: Integration Techniques.</em> Lamar University. https://tutorial.math.lamar.edu/</li>
+      <li>OpenStax. (2023). <em>Calculus Volume 2.</em> OpenStax. https://openstax.org/details/books/calculus-volume-2</li>
+      <li>MIT OpenCourseWare. (2021). <em>Single Variable Calculus: Integration.</em> https://ocw.mit.edu/courses/18-01sc-single-variable-calculus-fall-2010/</li>
+      <li>Khan Academy. (s.f.). <em>Cálculo integral.</em> https://www.khanacademy.org/math/integral-calculus</li>
+    </ul>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <span><strong>IEDEP</strong> · Instituto de Educación Digital del Estado de Puebla</span>
+  <span>Cálculo Integral — Mtro. José Armando Vera Rodríguez</span>
+</footer>
+
+</body>
+</html>
